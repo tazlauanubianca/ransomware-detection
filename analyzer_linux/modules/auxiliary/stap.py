@@ -20,11 +20,9 @@ class STAP(Auxiliary):
     def __init__(self):
         self.config = Config(cfg="analysis.conf")
         self.proc = None
-        log.warning("BIANCA DEBUG: IT GOT TO STAP INIT")
 
     def start(self):
         # helper function locating the stap module
-        log.warning("BIANCA DEBUG: STAP STARTEDDDDDDDDDDDD")
         def has_stap(p):
             only_stap = [fn for fn in os.listdir(p) if fn.startswith("stap_") and fn.endswith(".ko")]
             if only_stap: return os.path.join(p, only_stap[0])
@@ -39,7 +37,6 @@ class STAP(Auxiliary):
             log.warning("Could not find STAP LKM, aborting systemtap analysis.")
             return False
 
-        log.warning("HELLO DARKNESS MY OLD FRIENDDD")
         stap_start = time.time()
         self.proc = subprocess.Popen([
             "staprun", "-vv",
@@ -63,11 +60,12 @@ class STAP(Auxiliary):
 
     @staticmethod
     def _upload_file(local, remote):
-        log.debug("BIANCA SEND FILE FROM STRAP")
+        log.debug("BIANCA SEND FILE FROM STRAP " + str(local))
         if os.path.exists(local):
             nf = NetlogFile(remote)
             with open(local, "rb") as f:
                 for chunk in f:
+                    log.debug("CHUNK:: " + chunk)
                     nf.sock.sendall(chunk)  # dirty direct send, no reconnecting
             nf.close()
 
