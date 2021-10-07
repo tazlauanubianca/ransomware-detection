@@ -1,0 +1,11 @@
+--- ./.cuckoo/core/resultserver.py	2021-08-28 22:11:36.075399036 +0200
++++ /.cuckoo/core/resultserver.py	2021-07-14 15:41:02.000000000 +0200
+@@ -46,7 +46,7 @@
+     """Validate agent-provided path for result files"""
+     path = path.replace("\\", "/")
+     dir_part, name = os.path.split(path)
+-    if dir_part not in RESULT_UPLOADABLE:
++    if dir_part not in RESULT_DIRECTORIES:
+         raise CuckooOperationalError("Netlog client requested banned path: %r"
+                                      % path)
+     if any(c in BANNED_PATH_CHARS for c in name):

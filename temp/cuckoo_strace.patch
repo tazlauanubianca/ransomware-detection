@@ -1,0 +1,9 @@
+--- analyzer/linux/modules/packages/generic.py	2021-08-28 22:15:15.534235000 +0200
++++ analyzer/linux/modules/packages/generic.py	2021-08-14 22:06:06.000000000 +0200
+@@ -15,4 +15,4 @@
+ 
+     def start(self, path):
+         os.chmod(path, 0o755)
+-        return self.execute(["sh", "-c", path])
++        return self.execute(["su", "cuckoo", "-c", "strace -y -D -o /tmp/strace.log -f sh " + path.strip()])
+

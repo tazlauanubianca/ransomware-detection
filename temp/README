@@ -1,0 +1,7 @@
+The archive containes the following files:
+
+	- *.patch: 3 patches for Cuckoo sandbox
+	- ml.py: used for creating the machine learning 
+		model and for analysing the data
+	- data_pipeline_strace.py: data processing pipeline
+	- ransomware_script.py: custom ransomware implementation 
